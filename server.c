@@ -77,6 +77,7 @@ void handle_echo(int listenfd, int connfd)
     ssize_t n;
     char readbuf[MAXLENGTH];
     char buff[MAXLENGTH];
+    char *s;
 
     close(listenfd);
 
@@ -84,7 +85,7 @@ void handle_echo(int listenfd, int connfd)
     {
         readbuf[n] = '\0';
 
-        char *s = gettimestr();
+        s = gettimestr();
         buff[0] = '\0';
         strcat(buff, s);
         free(s);

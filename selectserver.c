@@ -132,6 +132,7 @@ void handle_echo(int connfd, int *client, fd_set *allset)
     ssize_t n;
     char readbuf[MAXLENGTH];
     char buff[MAXLENGTH];
+    char *s;
 
     if ((n = read(connfd, readbuf, sizeof(readbuf))) == 0)
     {
@@ -143,7 +144,7 @@ void handle_echo(int connfd, int *client, fd_set *allset)
     {
         readbuf[n] = '\0';
 
-        char *s = gettimestr();
+        s = gettimestr();
         buff[0] = '\0';
         strcat(buff, s);
         free(s);
