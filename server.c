@@ -16,7 +16,7 @@
 
 #define MAXLENGTH 1024
 
-void handle_echo();
+void handle_echo(int, int);
 
 int main(int argc, char **argv)
 {
