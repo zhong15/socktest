@@ -22,7 +22,7 @@ endif
 # make 每次执行都会判断文件是否最新，如果存在文件就不执行
 # .PHONY 存在与规则同名文件的时候令不生成文件的规则仍能执行
 
-all: client.o server.o selectclient.o selectserver.o pollserver.o
+all: client.o server.o selectclient.o selectserver.o pollserver.o kqueueserver.o
 
 client.o: client.c
 	$(CC) -o $@ $(CFLAGS) $^
@@ -37,6 +37,9 @@ selectserver.o: socktest.o selectserver.c
 	$(CC) -o $@ $(CFLAGS) $^
 
 pollserver.o: socktest.o pollserver.c
+	$(CC) -o $@ $(CFLAGS) $^
+
+kqueueserver.o: socktest.o kqueueserver.c
 	$(CC) -o $@ $(CFLAGS) $^
 
 socktest.o: socktest.c socktest.h
