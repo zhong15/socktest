@@ -118,7 +118,7 @@ int main(int argc, char **argv)
                 continue;
             if (client[i].revents & (POLLRDNORM | POLLERR))
             {
-                handle_echo(sockfd, &(client[i]));
+                handle_echo(sockfd, &client[i]);
 
                 if (--nready <= 0)
                     break;
