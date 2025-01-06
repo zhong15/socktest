@@ -1,5 +1,5 @@
 /*
- * cc --std=c89 -o selectserver.o socktest.o selectserver.c && ./selectserver.o
+ * cc --std=c89 -o pollserver.o socktest.o pollserver.c && ./pollserver.o
  */
 #include <errno.h>
 #include <limits.h>
