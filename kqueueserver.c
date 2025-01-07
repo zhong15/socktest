@@ -16,6 +16,11 @@
 #include <unistd.h>
 #include "socktest.h"
 
+/*
+ * https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/kqueue.2.html
+ * https://wiki.netbsd.org/tutorials/kqueue_tutorial/
+ */
+
 #define MAXLENGTH 1024
 #define REALLOC_SIZE 8
 
@@ -71,8 +76,14 @@ int main(int argc, char **argv)
         perror("kevent error\n");
         exit(EXIT_FAILURE);
     }
+    /*
+     * kevent: <listenfd, EVFILT_READ>
+     * EV_ADD: add event to kq
+     * EV_DELETE: delete event from kq
+     * ...
+     */
     EV_SET(change_events, listenfd, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, NULL);
-    // EV_SET(change_events+1, listenfd, EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, NULL);
+    /* EV_SET(change_events+1, listenfd, EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, NULL); */
     kevent(kq, change_events, 1, NULL, 0, NULL);
 
     for (;;)
@@ -108,9 +119,11 @@ int main(int argc, char **argv)
             {
                 handle_echo(events[i].ident, kq, &events[i]);
             }
-            // else if (events[i].filter == EVFILT_WRITE)
-            // {
-            // }
+            /*
+            else if (events[i].filter == EVFILT_WRITE)
+            {
+            }
+            */
         }
     }
 
