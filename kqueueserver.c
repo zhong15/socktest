@@ -8,6 +8,7 @@
 #include <string.h>
 #include <time.h>
 
+#if HAVE_KQUEUE
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/event.h>
@@ -203,3 +204,9 @@ connfd_close:
         perror("connfd kevent delete error\n");
     close(connfd);
 }
+#else
+int main(int argc, char **argv)
+{
+    printf("Unsupported kqueue!\n");
+}
+#endif /* HAVE_KQUEUE */
