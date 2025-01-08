@@ -114,7 +114,10 @@ int main(int argc, char **argv)
             connfd_set:
                 EV_SET(change_events + i, connfd, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, change_events + i);
                 if (kevent(kq, change_events + i, 1, NULL, 0, NULL) < 0)
+                {
                     perror("connfd kevent error\n");
+                    close(connfd);
+                }
             }
             else if (events[i].filter == EVFILT_READ)
             {
