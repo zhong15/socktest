@@ -8,6 +8,8 @@
 #include <string.h>
 #include <time.h>
 
+#include "socktest.h"
+
 #if HAVE_KQUEUE
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -15,7 +17,6 @@
 #include <sys/socket.h>
 /* #include <sys/types.h> */
 #include <unistd.h>
-#include "socktest.h"
 
 /*
  * https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/kqueue.2.html

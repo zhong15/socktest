@@ -8,6 +8,8 @@
 #include <string.h>
 #include <time.h>
 
+#include "socktest.h"
+
 #if HAVE_EPOLL
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -15,7 +17,6 @@
 #include <sys/socket.h>
 /* #include <sys/types.h> */
 #include <unistd.h>
-#include "socktest.h"
 #include <fcntl.h>
 
 #define MAX_EVENTS 10
