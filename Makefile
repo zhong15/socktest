@@ -21,37 +21,27 @@ endif
 # .PHONY echoFoo
 # make 每次执行都会判断文件是否最新，如果存在文件就不执行
 # .PHONY 存在与规则同名文件的时候令不生成文件的规则仍能执行
+# .PHONY 该工作目标不是一个真正的文件
 
-all: client.o server.o selectclient.o selectserver.o pollserver.o epollserver.o kqueueserver.o
+LIBRARY_OBJECTS = socktest.o
+CLIENT_OBJECTS = client.o selectclient.o
+SERVER_OBJECTS = server.o selectserver.o pollserver.o epollserver.o kqueueserver.o
+DEPEND_OBJECTS = selectclient.o $(SERVER_OBJECTS)
 
-client.o: client.c
-	$(CC) -o $@ $(CFLAGS) $^
+all: $(LIBRARY_OBJECTS) $(CLIENT_OBJECTS) $(SERVER_OBJECTS)
 
-server.o: socktest.o server.c
-	$(CC) -o $@ $(CFLAGS) $^
-
-selectclient.o: socktest.o selectclient.c
-	$(CC) -o $@ $(CFLAGS) $^
-
-selectserver.o: socktest.o selectserver.c
-	$(CC) -o $@ $(CFLAGS) $^
-
-pollserver.o: socktest.o pollserver.c
-	$(CC) -o $@ $(CFLAGS) $^
-
-epollserver.o: socktest.o epollserver.c
-	$(CC) -o $@ $(CFLAGS) $^
-
-kqueueserver.o: socktest.o kqueueserver.c
-	$(CC) -o $@ $(CFLAGS) $^
-
-socktest.o: socktest.c socktest.h
+$(LIBRARY_OBJECTS): %.o: %.c
 	$(CC) -c $(CFLAGS) $^
+
+$(CLIENT_OBJECTS) $(SERVER_OBJECTS): %.o: %.c
+	$(CC) -o $@ $(CFLAGS) $^
+
+$(DEPEND_OBJECTS): socktest.o
 
 .PHONY: clean echoFoo
 
 clean:
-	rm -f *.o *.h.gch
+	rm -f *.o *.out *.h.gch
 
 echoFoo:
 	echo FOO FOO FOO FOO
