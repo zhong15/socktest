@@ -52,7 +52,7 @@ int main(int argc, char **argv)
         if (stdineof == 0)
             FD_SET(fileno(stdin), &rset);
         FD_SET(sockfd, &rset);
-        maxfdp1 = max(fileno(stdin), sockfd) + 1;
+        maxfdp1 = MAX(fileno(stdin), sockfd) + 1;
         select(maxfdp1, &rset, NULL, NULL, NULL);
 
         if (FD_ISSET(sockfd, &rset))

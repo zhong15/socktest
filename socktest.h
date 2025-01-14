@@ -9,7 +9,8 @@
 #define HAVE_KQUEUE 1
 #endif
 
-int max(int, int);
+#define MAX(a, b) ((a) > (b)) ? (a) : (b)
+
 char *gettimestr(void);
 
 #endif /* SOCKTEST_H_ */

@@ -6,11 +6,6 @@
 #include <time.h>
 #include "socktest.h"
 
-int max(int a, int b)
-{
-    return a > b ? a : b;
-}
-
 char *gettimestr(void)
 {
     time_t t;
